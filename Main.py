@@ -15,15 +15,15 @@ clock = pygame.time.Clock()
 #Defining colours 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
 
 #Defining Objects
 bg_image = pygame.image.load("testbg.webp")
 player_image = pygame.image.load("emoji1.png")
 
+#Tracking for emoji's visible
 emoji1_visible = True
 emoji2_visible = True
+emoji3_visible = True
 
 # Load and scale background image & reload the background
 background = pygame.image.load("testbg.webp") #--> loads an image instead of a rectangle
@@ -35,6 +35,7 @@ player_image = pygame.image.load("Steve.png")
 # emoji images
 emoji1_image = pygame.image.load("emoji1.png")
 emoji2_image = pygame.image.load("emoji2.png")
+emoji3_image = pygame.image.load("emoji3.png")
 
 # player location and speed
 player_x = WIDTH // 2
@@ -46,7 +47,7 @@ emoji_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30)
 
 # Incrementing the score counter
 score = 0
-score_increment = 1
+score_increment = 100
 
 #movement variables (NEW)
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
@@ -89,19 +90,23 @@ while not end:
     player_y += player_dy
 
     p_rec = pygame.Rect(player_x, player_y, player_image.get_width(),player_image.get_height())
-    e1_rec = pygame.Rect(180,40, emoji1_image.get_width(),emoji1_image.get_height())
-    e2_rec = pygame.Rect(425,147, emoji2_image.get_width(),emoji2_image.get_height())
-    #Score updating - emoji 1
-    if p_rec.colliderect(e1_rec) and emoji1_visible==True:
+    e1_rect = pygame.Rect(180,40, emoji1_image.get_width(),emoji1_image.get_height())
+    e2_rect = pygame.Rect(425,147, emoji2_image.get_width(),emoji2_image.get_height())
+    e3_rect = pygame.Rect(43, 28, emoji3_image.get_width(),emoji3_image.get_height())
+
+#Score updating - emoji 1
+    if p_rec.colliderect(e1_rect) and emoji1_visible==True:
         emoji1_visible = False
         score += score_increment
     
 
 #make a rectangle for our images w/ same width and height and X ,Y
-
-
-    if p_rec.colliderect(e2_rec) and emoji2_visible==True:
+    if p_rec.colliderect(e2_rect) and emoji2_visible==True:
         emoji2_visible = False
+        score += score_increment
+
+    if p_rec.colliderect(e3_rect) and emoji3_visible==True:
+        emoji3_visible = False
         score += score_increment
 
 
@@ -112,6 +117,8 @@ while not end:
         screen.blit(emoji1_image, (180,40))
     if emoji2_visible == True:
         screen.blit(emoji2_image, (425, 147))
+    if emoji3_visible == True:
+        screen.blit(emoji3_image, (43, 28))
 
     #Score font to be visible
     font = pygame.font.Font(None, 36)
