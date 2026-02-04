@@ -28,7 +28,7 @@ player_image = pygame.image.load("Steve.png")
 # player location and speed
 player_x = WIDTH // 2
 player_y = HEIGHT // 2
-player_speed = 5
+player_speed = 7
 
 #movement variables (NEW)
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
