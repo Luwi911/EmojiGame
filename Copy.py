@@ -1,29 +1,33 @@
-import pygame
+# 6.4.py 
+# using pygame library and images
 
+import pygame
+# to install PyGame: open a command prompt and type "python -m pip install -U pygame --user"
+
+#-------------------------------------------------------------------
+# INITIALIZATION
+#-------------------------------------------------------------------
+# A. Initialize Pygame
 pygame.init()
 
-#Estalish screen WIDTH & HEIGHT
-WIDTH, HEIGHT = (500, 400)
-FPS = 60 #--> Smoother movement
+# B. Create the game window and clock
+WIDTH, HEIGHT = 640, 480
+FPS = 60 # Increased FPS for smoother movement
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Pygame Emoji Game Jam")
+pygame.display.set_caption("Pygame Example")
 clock = pygame.time.Clock()
 
-#Defining colours 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
-
-#Defining Objects
-bg_image = pygame.image.load("testbg.webp")
-player_image = pygame.image.load("Steve.png")
-
+# C. Define game variables
+#-----------------------------------------------------------
+# 6.4 using images
+#<<---------------------------------------------------------
+# background image
 # Load and scale background image
-background = pygame.image.load("testbg.webp") #--> loads an image instead of a rectangle
+background = pygame.image.load("Steve.png") #--> loads an image instead of a rectangle
 # player image
-player_image = pygame.image.load("Steve.png")
+player_image = pygame.image.load("testbg.webp")
 
+#>>---------------------------------------------------------
 # player location and speed
 player_x = WIDTH // 2
 player_y = HEIGHT // 2
@@ -33,7 +37,21 @@ player_speed = 5
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
 player_dy = 0 #--> "difference in Y"
 
+#(Determines if the player should be moving or not (& which direction))
 
+"""
+# enemy location and speed
+enemy_x = WIDTH // 2
+enemy_y = HEIGHT // 2
+enemy_speed = 5
+
+#movement variables (NEW)
+enemy_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
+enemy_dy = 0 #--> "difference in Y"
+"""
+#-------------------------------------------------------------------
+# MAIN GAME LOOP
+#-------------------------------------------------------------------
 end = False
 while not end:
     #---------------------------------------------------------------
@@ -69,11 +87,25 @@ while not end:
     player_x += player_dx 
     player_y += player_dy
 
+#C. Enemy movements (AUTO)
+#enemy_x += 1
 
+    #---------------------------------------------------------------
+    # DRAW
+    #---------------------------------------------------------------
+    # A. draw background (no need to clear screen)
+    #---------------------------------------------------------
+    # 6.4 using images
+    #<<---------------------------------------------------------------
     screen.blit(background, (0, 0))  # draw background Image ("Block Image Transfer" = blit)
     # B. draw player
     screen.blit(player_image, (player_x, player_y))  # draw player
 
+    #C. Draw enemy
+    #screen.blit(enemy_image, (enemy_x, enemy_y))  # draw player
+
+    #>>---------------------------------------------------------------
+    # C. Update the display and cap frame rate
     pygame.display.flip()
     clock.tick(FPS)
 
