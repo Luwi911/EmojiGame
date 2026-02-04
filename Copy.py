@@ -97,7 +97,7 @@ while not end:
     #---------------------------------------------------------
     # 6.4 using images
     #<<---------------------------------------------------------------
-    screen.blit(background, (0, 0))  # draw background Image ("Block Image Transfer" = blit)
+    screen.blit(background, (WIDTH, HEIGHT))  # draw background Image ("Block Image Transfer" = blit)
     # B. draw player
     screen.blit(player_image, (player_x, player_y))  # draw player
 

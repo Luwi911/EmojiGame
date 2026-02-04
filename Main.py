@@ -21,7 +21,7 @@ player_image = pygame.image.load("Steve.png")
 
 # Load and scale background image
 background = pygame.image.load("testbg.webp") #--> loads an image instead of a rectangle
-background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+background = pygame.transform.scale(background, (WIDTH, HEIGHT)) #--> Refreshes the background
 # player image
 player_image = pygame.image.load("Steve.png")
 
