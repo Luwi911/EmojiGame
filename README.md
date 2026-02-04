@@ -1,1 +1,1 @@
-/* Game Concpet: Emoji Pac man */
+GAME IDEA: Game Concpet: Emoji Pac man
