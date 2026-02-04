@@ -22,13 +22,17 @@ player_image = pygame.image.load("Steve.png")
 # Load and scale background image
 background = pygame.image.load("testbg.webp") #--> loads an image instead of a rectangle
 background = pygame.transform.scale(background, (WIDTH, HEIGHT)) #--> Refreshes the background
+
 # player image
 player_image = pygame.image.load("Steve.png")
+
+# emoji image
+emoji1_image = pygame.image.load("emoji1.png")
 
 # player location and speed
 player_x = WIDTH // 2
 player_y = HEIGHT // 2
-player_speed = 7
+player_speed = 4
 
 #movement variables (NEW)
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
@@ -74,6 +78,7 @@ while not end:
     screen.blit(background, (0, 0))  # draw background Image ("Block Image Transfer" = blit)
     # B. draw player
     screen.blit(player_image, (player_x, player_y))  # draw player
+    screen.blit(emoji1_image, (0,0))
 
     pygame.display.flip()
     clock.tick(FPS)
