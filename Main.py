@@ -69,13 +69,15 @@ game_over = False
 end = False
 
 
-#movement variables (NEW)
+#movement variables
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
 player_dy = 0 #--> "difference in Y"
 
-end = False
-
-
+#Movement Keys  - LUWI (NEW)
+moveleft = True
+moveup = True
+movedown = True
+moveright = True
 
 while not end:
     if game_over: 
@@ -87,11 +89,6 @@ while not end:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             end = True
-
-            moveleft = True
-            moveup = True
-            movedown = True
-            moveright = True
 
         # start movement on key press (moves by 1 space)
         if event.type == pygame.KEYDOWN:
