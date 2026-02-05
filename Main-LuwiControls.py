@@ -58,6 +58,11 @@ player_dy = 0 #--> "difference in Y"
 
 
 end = False
+moveleft = True
+moveup = True
+movedown = True
+moveright = True
+
 while not end:
     #---------------------------------------------------------------
     # UPDATE: 
@@ -70,23 +75,49 @@ while not end:
         # start movement on key press (moves by 1 space)
         if event.type == pygame.KEYDOWN:
             # arrow keys
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT and moveleft == True:
                 player_dx = -player_speed #-->dx is CHANGING (-speed to go LEFT)
-            if event.key == pygame.K_RIGHT: #-->dx is CHANGING (+speed to go RIGHT)
+            if event.key == pygame.K_RIGHT and moveright == True: #-->dx is CHANGING (+speed to go RIGHT)
                 player_dx = player_speed
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP and moveup == True:
                 player_dy = -player_speed #--> (-y is GOING UP)
-            if event.key == pygame.K_DOWN: #--> (+y is GOING DOWN)
+            if event.key == pygame.K_DOWN and movedown == True: #--> (+y is GOING DOWN)
                 player_dy = player_speed
             # Escape key 
             if event.key == pygame.K_ESCAPE:
                 end = True
+
         # end movement on key release
         if event.type == pygame.KEYUP:
             if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
                 player_dx = 0
             if event.key in (pygame.K_UP, pygame.K_DOWN):
                 player_dy = 0
+
+
+#to check if player exists boundaries
+    if player_x <= 0:
+        moveleft = False
+        player_x = 10
+    elif player_x >= 0: moveleft = True
+
+    if player_y <= 0:
+        moveup = False
+        player_y = 10
+    elif player_y >= 0: moveup = True
+
+    if player_y >= 400:
+        movedown = False
+        player_y = 290
+    elif player_y <= 400: movedown = True
+
+    if player_x >= 500:
+        moveright = False
+        player_x = 440
+    elif player_x <= 500: moveright = True
+
+
+
 
     # B. Game logic: Update player position based on input
     player_x += player_dx 
