@@ -34,11 +34,17 @@ background = pygame.transform.scale(background, (WIDTH, HEIGHT)) #--> Refreshes 
 
 # player image
 player_image = pygame.image.load("Steve.png")
+player_image = pygame.transform.scale(player_image, (64, 64))
+
 
 # emoji images
 emoji1_image = pygame.image.load("emoji1.png")
 emoji2_image = pygame.image.load("emoji2.png")
 emoji3_image = pygame.image.load("emoji3.png")
+
+#GameOver image
+GameOver_image = pygame.image.load("GameOver.png")
+GameOver_image = pygame.transform.scale(GameOver_image, (WIDTH, HEIGHT))
 
 # player location and speed
 player_x = WIDTH // 2
@@ -52,25 +58,40 @@ emoji_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30)
 score = 0
 score_increment = 100
 
+def EmojisCollected():
+    return (not emoji1_visible and not emoji2_visible and not emoji3_visible)
+
+def GameOver_screen():
+    screen.blit(GameOver_image, (0, 0))
+    pygame.display.flip()
+
+game_over = False
+end = False
+
+
 #movement variables (NEW)
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
 player_dy = 0 #--> "difference in Y"
 
-
 end = False
-moveleft = True
-moveup = True
-movedown = True
-moveright = True
+
+
 
 while not end:
-    #---------------------------------------------------------------
-    # UPDATE: 
-    #---------------------------------------------------------------
+    if game_over: 
+        GameOver_screen() 
+        continue
+
+
     # A. Event handling: Check for user input
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             end = True
+
+            moveleft = True
+            moveup = True
+            movedown = True
+            moveright = True
 
         # start movement on key press (moves by 1 space)
         if event.type == pygame.KEYDOWN:
@@ -128,6 +149,7 @@ while not end:
     e2_rect = pygame.Rect(425,147, emoji2_image.get_width(),emoji2_image.get_height())
     e3_rect = pygame.Rect(43, 28, emoji3_image.get_width(),emoji3_image.get_height())
 
+#==============================================================
 #Score updating - emoji 1
     if p_rec.colliderect(e1_rect) and emoji1_visible==True:
         emoji1_visible = False
@@ -142,6 +164,9 @@ while not end:
     if p_rec.colliderect(e3_rect) and emoji3_visible==True:
         emoji3_visible = False
         score += score_increment
+#===============================================================
+    if EmojisCollected():
+        game_over = True
 
 
     screen.blit(background, (0, 0))  # draw background Image ("Block Image Transfer" = blit)
